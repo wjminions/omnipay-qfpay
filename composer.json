@@ -20,7 +20,7 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Omnipay\\qfpay\\" : "src/" }
+        "psr-4": { "Omnipay\\Qfpay\\" : "src/" }
     },
     "require": {
         "omnipay/common": "~2.0"

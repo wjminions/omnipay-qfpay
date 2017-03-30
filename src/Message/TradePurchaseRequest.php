@@ -6,10 +6,10 @@ use Omnipay\Common\Message\ResponseInterface;
 use Omnipay\Qfpay\Helper;
 
 /**
- * Class QfpayPurchaseRequest
+ * Class TradePurchaseRequest
  * @package Omnipay\Qfpay\Message
  */
-class QfpayPurchaseRequest extends AbstractQfpayRequest
+class TradePurchaseRequest extends AbstractTradeRequest
 {
 
     /**

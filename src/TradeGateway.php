@@ -5,10 +5,10 @@ namespace Omnipay\Qfpay;
 use Omnipay\Common\AbstractGateway;
 
 /**
- * Class QfpayGateway
- * @package Omnipay\Paydollar
+ * Class TradeGateway
+ * @package Omnipay\Qfpay
  */
-class QfpayGateway extends AbstractGateway
+class TradeGateway extends AbstractGateway
 {
 
     /**
@@ -18,7 +18,7 @@ class QfpayGateway extends AbstractGateway
      */
     public function getName()
     {
-        return 'Qfpay_Qfpay';
+        return 'Qfpay_Trade';
     }
 
     public function setEnvironment($value)
@@ -135,12 +135,12 @@ class QfpayGateway extends AbstractGateway
 
     public function purchase(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Paydollar\Message\QfpayPurchaseRequest', $parameters);
+        return $this->createRequest('\Omnipay\Paydollar\Message\TradePurchaseRequest', $parameters);
     }
 
 
     public function completePurchase(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Paydollar\Message\QfpayCompletePurchaseRequest', $parameters);
+        return $this->createRequest('\Omnipay\Paydollar\Message\TradeCompletePurchaseRequest', $parameters);
     }
 }

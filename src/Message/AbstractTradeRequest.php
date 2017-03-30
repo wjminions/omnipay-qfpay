@@ -6,10 +6,10 @@ use Omnipay\Common\Message\AbstractRequest;
 use Omnipay\Qfpay\Helper;
 
 /**
- * Class AbstractQfpayRequest
+ * Class AbstractTradeRequest
  * @package Omnipay\Qfpay\Message
  */
-abstract class AbstractQfpayRequest extends AbstractRequest
+abstract class AbstractTradeRequest extends AbstractRequest
 {
     protected $production = 'https://osqt.qfpay.com/';
     protected $sandbox = 'https://osqt.qfpay.com/';
