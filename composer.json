@@ -1,0 +1,28 @@
+{
+    "name": "wjminions/omnipay-qfpay",
+    "type": "library",
+    "description": "Qfpay driver for the Omnipay payment processing library",
+    "keywords": [
+        "gateway",
+        "qfpay gateway service",
+        "merchant",
+        "qfpay",
+        "omnipay",
+        "pay",
+        "payment"
+    ],
+    "homepage": "https://github.com/wjminions/omnipay-qfpay",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "wjminions",
+            "homepage": "https://github.com/wjminions/omnipay-qfpay"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Omnipay\\qfpay\\" : "src/" }
+    },
+    "require": {
+        "omnipay/common": "~2.0"
+    }
+}
