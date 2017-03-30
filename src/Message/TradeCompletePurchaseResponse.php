@@ -5,10 +5,10 @@ namespace Omnipay\Qfpay\Message;
 use Omnipay\Common\Message\AbstractResponse;
 
 /**
- * Class QfpayCompletePurchaseResponse
+ * Class TradeCompletePurchaseResponse
  * @package Omnipay\Qfpay\Message
  */
-class QfpayCompletePurchaseResponse extends AbstractResponse
+class TradeCompletePurchaseResponse extends AbstractResponse
 {
 
     public function isPaid()

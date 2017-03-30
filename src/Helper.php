@@ -3,7 +3,7 @@ namespace Omnipay\Qfpay;
 
 /**
  * Class Helper
- * @package Omnipay\Paydollar
+ * @package Omnipay\Qfpay
  */
 class Helper
 {

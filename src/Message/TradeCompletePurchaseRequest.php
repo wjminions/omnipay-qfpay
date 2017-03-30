@@ -6,10 +6,10 @@ use Omnipay\Common\Message\ResponseInterface;
 use Omnipay\Qfpay\Helper;
 
 /**
- * Class QfpayCompletePurchaseRequest
+ * Class TradeCompletePurchaseRequest
  * @package Omnipay\Qfpay\Message
  */
-class QfpayCompletePurchaseRequest extends AbstractQfpayRequest
+class TradeCompletePurchaseRequest extends AbstractTradeRequest
 {
 
     /**
@@ -65,6 +65,6 @@ class QfpayCompletePurchaseRequest extends AbstractQfpayRequest
             $data['is_paid']        = false;
         }
 
-        return $this->response = new QfpayCompletePurchaseResponse($this, $data);
+        return $this->response = new TradeCompletePurchaseResponse($this, $data);
     }
 }

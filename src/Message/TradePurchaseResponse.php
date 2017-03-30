@@ -7,10 +7,10 @@ use Omnipay\Common\Message\RedirectResponseInterface;
 use Omnipay\Qfpay\Helper;
 
 /**
- * Class QfpayPurchaseResponse
+ * Class TradePurchaseResponse
  * @package Omnipay\Qfpay\Message
  */
-class QfpayPurchaseResponse extends AbstractResponse implements RedirectResponseInterface
+class TradePurchaseResponse extends AbstractResponse implements RedirectResponseInterface
 {
 
     public function isSuccessful()
