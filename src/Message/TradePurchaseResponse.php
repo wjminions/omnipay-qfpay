@@ -59,10 +59,19 @@ class TradePurchaseResponse extends AbstractResponse implements RedirectResponse
 
         $responseData = json_decode($response, true);
 
-        if (! isset($responseData['pay_url'])) {
-            throw new  \Exception('Error: missing pay_url parameter');
-        }
+        $pay_type = $this->getRequest()->getPayType();
+        if ($pay_type == '800151') {
+            if (! isset($responseData['pay_url'])) {
+                throw new  \Exception('Error: missing pay_url parameter');
+            }
 
-        return "<script>top.location.href='" . $responseData['pay_url'] . "';</script>";
+            return "<script>top.location.href='" . $responseData['pay_url'] . "';</script>";
+        } else {
+            if (! isset($responseData['qrcode'])) {
+                throw new  \Exception('Error: missing qrcode parameter');
+            }
+
+            return "<script>top.location.href='" . $responseData['qrcode'] . "';</script>";
+        }
     }
 }

@@ -29,8 +29,7 @@ class TradePurchaseRequest extends AbstractTradeRequest
             'notify_url'   => $this->getNotifyUrl(),
             'return_url'   => $this->getReturnUrl()
         );
-//        $data['product_name'] = 'apple';
-//        $data['auth_code'] = '';
+
         if ($this->getKey()) {
             $data['sign'] = Helper::getSignByDataAndKey($data, $this->getKey());
         }
