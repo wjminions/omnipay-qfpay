@@ -60,7 +60,7 @@ class TradePurchaseResponse extends AbstractResponse implements RedirectResponse
         $responseData = json_decode($response, true);
 
         $pay_type = $this->getRequest()->getPayType();
-        if ($pay_type == '800151') {
+        if ($pay_type == '800152') {
             if (! isset($responseData['pay_url'])) {
                 throw new  \Exception('Error: missing pay_url parameter');
             }
