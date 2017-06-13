@@ -5,10 +5,10 @@ namespace Omnipay\Qfpay\Message;
 use Omnipay\Common\Message\AbstractResponse;
 
 /**
- * Class TradeCompletePurchaseResponse
+ * Class TradeResponse
  * @package Omnipay\Qfpay\Message
  */
-class TradeCompletePurchaseResponse extends AbstractResponse
+class TradeResponse extends AbstractResponse
 {
 
     public function isPaid()
@@ -28,6 +28,10 @@ class TradeCompletePurchaseResponse extends AbstractResponse
      */
     public function isSuccessful()
     {
-        return true;
+        if ($this->data['respcd'] == '0000') {
+            return true;
+        }
+
+        return false;
     }
 }

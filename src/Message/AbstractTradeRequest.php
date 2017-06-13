@@ -14,12 +14,20 @@ abstract class AbstractTradeRequest extends AbstractRequest
     protected $production = 'https://osqt.qfpay.com/';
     protected $sandbox = 'https://osqt.qfpay.com/';
 
-    public function getPayUrl()
+    protected $methods = array (
+        'payment' => 'trade/v1/payment',
+        'close'  => 'trade/v1/close',
+        'refund'   => 'trade/v1/refund',
+        'reversal' => 'trade/v1/reversal',
+        'query' => 'trade/v1/query',
+    );
+
+    public function getPayUrl($type)
     {
         if ($this->getParameter('environment') == 'production') {
-            return $this->production.'trade/v1/payment';
+            return $this->production . $this->methods[$type];
         } else {
-            return $this->sandbox.'trade/v1/payment';
+            return $this->sandbox . $this->methods[$type];
         }
     }
 
@@ -132,5 +140,17 @@ abstract class AbstractTradeRequest extends AbstractRequest
     public function getTxdtm()
     {
         return $this->getParameter('txdtm');
+    }
+
+
+    public function setSyssn($value)
+    {
+        return $this->setParameter('syssn', $value);
+    }
+
+
+    public function getSyssn()
+    {
+        return $this->getParameter('syssn');
     }
 }

@@ -48,7 +48,7 @@ class TradePurchaseResponse extends AbstractResponse implements RedirectResponse
         $header[] = 'X-QF-SIGN:' . $data['sign'];
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->getRequest()->getPayUrl());
+        curl_setopt($ch, CURLOPT_URL, $this->getRequest()->getPayUrl('payment'));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);

@@ -56,6 +56,6 @@ class TradeCompletePurchaseRequest extends AbstractTradeRequest
      */
     public function sendData($data)
     {
-        return $this->response = new TradeCompletePurchaseResponse($this, $data);
+        return $this->response = new TradeResponse($this, $data);
     }
 }
