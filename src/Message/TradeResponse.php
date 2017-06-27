@@ -10,6 +10,35 @@ use Omnipay\Common\Message\AbstractResponse;
  */
 class TradeResponse extends AbstractResponse
 {
+    public function isRedirect()
+    {
+        return false;
+    }
+
+
+    public function getRedirectMethod()
+    {
+        return 'POST';
+    }
+
+
+    public function getRedirectUrl()
+    {
+        return false;
+    }
+
+
+    public function getRedirectHtml()
+    {
+        return false;
+    }
+
+
+    public function getTransactionNo()
+    {
+        return isset($this->data['syssn']) ? $this->data['syssn'] : '';
+    }
+
 
     public function isPaid()
     {
@@ -33,5 +62,10 @@ class TradeResponse extends AbstractResponse
         }
 
         return false;
+    }
+
+    public function getMessage()
+    {
+        return isset($this->data['respMsg']) ? $this->data['respMsg'] : '';
     }
 }
