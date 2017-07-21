@@ -73,4 +73,30 @@ class Helper
 
         return $map;
     }
+
+    /**
+     * 2999状态时查询退款是否成功
+     *
+     * @param $data
+     * @return mixed|null
+     */
+    public static function query ($app_code, $pay_url, $data)
+    {
+        // 设置Header
+        $header = array();
+        $header[] = 'X-QF-APPCODE:' . $app_code;
+        $header[] = 'X-QF-SIGN:' . $data['sign'];
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $pay_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data['query_string']);
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return json_decode($response, JSON_UNESCAPED_UNICODE);
+    }
 }

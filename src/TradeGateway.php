@@ -144,8 +144,13 @@ class TradeGateway extends AbstractGateway
         return $this->createRequest('\Omnipay\Qfpay\Message\TradeCompletePurchaseRequest', $parameters);
     }
 
-    public function Refund(array $parameters = array())
+    public function refund(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\Qfpay\Message\TradeRefundRequest', $parameters);
+    }
+
+    public function query(array $parameters = array())
+    {
+        return $this->createRequest('\Omnipay\Qfpay\Message\TradeQueryRequest', $parameters);
     }
 }

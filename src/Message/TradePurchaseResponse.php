@@ -42,22 +42,25 @@ class TradePurchaseResponse extends AbstractResponse implements RedirectResponse
     {
         $data = $this->data;
 
-        // 设置Header
-        $header = array();
-        $header[] = 'X-QF-APPCODE:' . $this->getRequest()->getAppCode();
-        $header[] = 'X-QF-SIGN:' . $data['sign'];
+//        // 设置Header
+//        $header = array();
+//        $header[] = 'X-QF-APPCODE:' . $this->getRequest()->getAppCode();
+//        $header[] = 'X-QF-SIGN:' . $data['sign'];
+//
+//        $ch = curl_init();
+//        curl_setopt($ch, CURLOPT_URL, $this->getRequest()->getPayUrl('payment'));
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+//        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+//        curl_setopt($ch, CURLOPT_POST, 1);
+//        curl_setopt($ch, CURLOPT_POSTFIELDS, $data['query_string']);
+//        $response = curl_exec($ch);
+//        curl_close($ch);
+//
+//        $responseData = json_decode($response, true);
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->getRequest()->getPayUrl('payment'));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data['query_string']);
-        $response = curl_exec($ch);
-        curl_close($ch);
 
-        $responseData = json_decode($response, true);
+        $responseData = Helper::query($this->getRequest()->getAppCode(), $this->getRequest()->getPayUrl('payment'), $data);
 
         $pay_type = $this->getRequest()->getPayType();
         if ($pay_type == '800152') {

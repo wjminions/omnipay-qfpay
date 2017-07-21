@@ -49,21 +49,21 @@ class TradeRefundRequest extends AbstractTradeRequest
     public function sendData($data)
     {
         // 设置Header
-        $header = array();
-        $header[] = 'X-QF-APPCODE:' . $this->getAppCode();
-        $header[] = 'X-QF-SIGN:' . $data['sign'];
+//        $header = array();
+//        $header[] = 'X-QF-APPCODE:' . $this->getAppCode();
+//        $header[] = 'X-QF-SIGN:' . $data['sign'];
+//
+//        $ch = curl_init();
+//        curl_setopt($ch, CURLOPT_URL, $this->getPayUrl('refund'));
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+//        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+//        curl_setopt($ch, CURLOPT_POST, 1);
+//        curl_setopt($ch, CURLOPT_POSTFIELDS, $data['query_string']);
+//        $response = curl_exec($ch);
+//        curl_close($ch);
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->getPayUrl('refund'));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data['query_string']);
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        $responseData = json_decode($response, JSON_UNESCAPED_UNICODE);
+        $responseData = Helper::query($this->getAppCode(), $this->getPayUrl('refund'), $data);
 
         if ($responseData['respcd'] == '2999') {
             sleep(3);
@@ -79,12 +79,12 @@ class TradeRefundRequest extends AbstractTradeRequest
 
             $refundData['query_string'] = Helper::getQueryString($refundData);
 
-            $refundQueryData = $this->refundQuery($refundData);
+            $refundQueryData = Helper::query($this->getAppCode(), $this->getPayUrl('query'), $refundData);
 
             if (! in_array($responseData['syssn'],array_column($refundQueryData['data'],'syssn','sysdtm'))) {
                 sleep(3);
 
-                $refundQueryData = $this->refundQuery($refundData);
+                $refundQueryData = Helper::query($this->getAppCode(), $this->getPayUrl('query'), $refundData);
 
                 if (in_array($responseData['syssn'],array_column($refundQueryData['data'],'syssn','sysdtm'))) {
                     $responseData['respcd'] = '0000';
@@ -95,31 +95,5 @@ class TradeRefundRequest extends AbstractTradeRequest
         }
 
         return $this->response = new TradeResponse($this, $responseData);
-    }
-
-    /**
-     * 2999状态时查询退款是否成功
-     *
-     * @param $data
-     * @return mixed|null
-     */
-    public function refundQuery ($data)
-    {
-        // 设置Header
-        $header = array();
-        $header[] = 'X-QF-APPCODE:' . $this->getAppCode();
-        $header[] = 'X-QF-SIGN:' . $data['sign'];
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->getPayUrl('query'));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data['query_string']);
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        return json_decode($response, JSON_UNESCAPED_UNICODE);
     }
 }
