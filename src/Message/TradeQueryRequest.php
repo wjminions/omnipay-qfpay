@@ -20,9 +20,8 @@ class TradeQueryRequest extends AbstractTradeRequest
      */
     public function getData()
     {
-        $this->validate('syssn');
-
         $data = array(
+            'out_trade_no' => $this->getOutTradeNo(),
             'syssn'        => $this->getSyssn()
         );
 
@@ -54,7 +53,7 @@ class TradeQueryRequest extends AbstractTradeRequest
         $queryData = Helper::query($this->getAppCode(), $this->getPayUrl('query'), $query);
 
         foreach ($queryData['data'] as $value) {
-            if ($data['syssn'] == $value['syssn']) {
+            if ($data['out_trade_no'] == $value['out_trade_no'] || $data['syssn'] == $value['syssn']) {
                 $data = $value;
                 break;
             }
